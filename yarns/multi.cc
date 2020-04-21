@@ -326,7 +326,7 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
       cv[5] = ?;
       cv[6] = ?;
       cv[7] = ?;
-      cv[8] = ?;
+      cv[8] = voice_[0].velocity_dac_code();
       cv[9] = ?;
       cv[10] = ?;
       cv[11] = ?;
@@ -491,7 +491,7 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
       gate[9] = reset_or_playing_flag();
       break;
     
-    case LAYOUT_DUO_UNI_8:
+    case LAYOUT_DUO_UNI_4:
       cv[0] = voice_[0].note_dac_code();
       cv[1] = voice_[0].note_dac_code();
       cv[2] = voice_[0].note_dac_code();
@@ -520,62 +520,62 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
       gate[9] = reset_or_playing_flag();
       break;
       
-    case LAYOUT_DUAL_POLY:
-    case LAYOUT_QUAD_POLYCHAINED:
+    case LAYOUT_QUAD_UNI_2:
       cv[0] = voice_[0].note_dac_code();
-      cv[1] = voice_[1].note_dac_code();
-      cv[2] = voice_[0].aux_cv_dac_code();
-      cv[3] = voice_[1].aux_cv_dac_code_2();
+      cv[1] = voice_[0].note_dac_code();
+      cv[2] = voice_[1].note_dac_code();
+      cv[3] = voice_[1].note_dac_code();
+      cv[4] = voice_[2].note_dac_code();
+      cv[5] = voice_[2].note_dac_code();
+      cv[6] = voice_[3].note_dac_code();
+      cv[7] = voice_[3].note_dac_code();
+      cv[8] = voice_[0].velocity_dac_code();
+      cv[9] = voice_[0].velocity_dac_code();
+      cv[10] = voice_[1].velocity_dac_code();
+      cv[11] = voice_[1].velocity_dac_code();
+      cv[12] = voice_[2].velocity_dac_code();
+      cv[13] = voice_[2].velocity_dac_code();
+      cv[14] = voice_[3].velocity_dac_code();
+      cv[15] = voice_[3].velocity_dac_code();
       gate[0] = voice_[0].gate();
-      gate[1] = voice_[1].gate();
-      gate[2] = clock();
-      gate[3] = reset_or_playing_flag();
+      gate[1] = voice_[0].gate();
+      gate[2] = voice_[1].gate();
+      gate[3] = voice_[1].gate();
+      gate[4] = voice_[2].gate();
+      gate[5] = voice_[2].gate();
+      gate[6] = voice_[3].gate();
+      gate[7] = voice_[3].gate();
+      gate[8] = clock();
+      gate[9] = reset_or_playing_flag();
       break;
-    
-    case LAYOUT_QUAD_MONO:
-    case LAYOUT_QUAD_POLY:
-    case LAYOUT_OCTAL_POLYCHAINED:
-    case LAYOUT_THREE_ONE:
+      
+    case LAYOUT_OCTAL:
       cv[0] = voice_[0].note_dac_code();
       cv[1] = voice_[1].note_dac_code();
       cv[2] = voice_[2].note_dac_code();
       cv[3] = voice_[3].note_dac_code();
+      cv[4] = voice_[4].note_dac_code();
+      cv[5] = voice_[5].note_dac_code();
+      cv[6] = voice_[6].note_dac_code();
+      cv[7] = voice_[7].note_dac_code();
+      cv[8] = voice_[0].velocity_dac_code();
+      cv[9] = voice_[1].velocity_dac_code();
+      cv[10] = voice_[2].velocity_dac_code();
+      cv[11] = voice_[3].velocity_dac_code();
+      cv[12] = voice_[4].velocity_dac_code();
+      cv[13] = voice_[5].velocity_dac_code();
+      cv[14] = voice_[6].velocity_dac_code();
+      cv[15] = voice_[7].velocity_dac_code();
       gate[0] = voice_[0].gate();
       gate[1] = voice_[1].gate();
-      if (settings_.clock_override) {
-        gate[2] = clock();
-        gate[3] = reset_or_playing_flag();
-      } else {
-        gate[2] = voice_[2].gate();
-        gate[3] = voice_[3].gate();
-      }
-      break;
-    
-    case LAYOUT_QUAD_TRIGGERS:
-      cv[0] = voice_[0].trigger_dac_code();
-      cv[1] = voice_[1].trigger_dac_code();
-      cv[2] = voice_[2].trigger_dac_code();
-      cv[3] = voice_[3].trigger_dac_code();
-      gate[0] = voice_[0].trigger() && ~voice_[1].gate();
-      gate[1] = voice_[0].trigger() && voice_[1].gate();
-      gate[2] = clock();
-      gate[3] = reset_or_playing_flag();
-      break;
-
-    case LAYOUT_QUAD_VOLTAGES:
-      cv[0] = voice_[0].aux_cv_dac_code();
-      cv[1] = voice_[1].aux_cv_dac_code();
-      cv[2] = voice_[2].aux_cv_dac_code();
-      cv[3] = voice_[3].aux_cv_dac_code();
-      gate[0] = voice_[0].gate();
-      gate[1] = voice_[1].gate();
-      if (settings_.clock_override) {
-        gate[2] = clock();
-        gate[3] = reset_or_playing_flag();
-      } else {
-        gate[2] = voice_[2].gate();
-        gate[3] = voice_[3].gate();
-      }
+      gate[2] = voice_[2].gate();
+      gate[3] = voice_[3].gate();
+      gate[4] = voice_[4].gate();
+      gate[5] = voice_[5].gate();
+      gate[6] = voice_[6].gate();
+      gate[7] = voice_[7].gate();
+      gate[8] = clock();
+      gate[9] = reset_or_playing_flag();
       break;
   }
 }
@@ -637,11 +637,102 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
   
   switch (settings_.layout) {
     case LAYOUT_MONO:
-    case LAYOUT_DUAL_POLYCHAINED:
       brightness[0] = voice_[0].gate() ? 255 : 0;
-      brightness[1] = voice_[0].velocity() << 1;
-      brightness[2] = voice_[0].aux_cv();
-      brightness[3] = voice_[0].aux_cv_2();
+      brightness[1] = ?;
+      brightness[2] = ?;
+      brightness[3] = ?;
+      brightness[4] = ?;
+      brightness[5] = ?;
+      brightness[6] = ?;
+      brightness[7] = ?;
+      break;
+      
+    case LAYOUT_MONO_UNI_2:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = ?;
+      brightness[3] = ?;
+      brightness[4] = ?;
+      brightness[5] = ?;
+      brightness[6] = ?;
+      brightness[7] = ?;
+      break;
+      
+    case LAYOUT_MONO_UNI_4:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = voice_[0].gate() ? 255 : 0;
+      brightness[3] = voice_[0].gate() ? 255 : 0;
+      brightness[4] = ?;
+      brightness[5] = ?;
+      brightness[6] = ?;
+      brightness[7] = ?;
+      break;
+      
+    case LAYOUT_MONO_UNI_8:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = voice_[0].gate() ? 255 : 0;
+      brightness[3] = voice_[0].gate() ? 255 : 0;
+      brightness[4] = voice_[0].gate() ? 255 : 0;
+      brightness[5] = voice_[0].gate() ? 255 : 0;
+      brightness[6] = voice_[0].gate() ? 255 : 0;
+      brightness[7] = voice_[0].gate() ? 255 : 0;
+      break;
+      
+      case LAYOUT_DUO:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[1].gate() ? 255 : 0;
+      brightness[2] = ?;
+      brightness[3] = ?;
+      brightness[4] = ?;
+      brightness[5] = ?;
+      brightness[6] = ?;
+      brightness[7] = ?;
+      break;
+      
+      case LAYOUT_DUO_UNI_2:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = voice_[1].gate() ? 255 : 0;
+      brightness[3] = voice_[1].gate() ? 255 : 0;
+      brightness[4] = ?;
+      brightness[5] = ?;
+      brightness[6] = ?;
+      brightness[7] = ?;
+      break;
+      
+      case LAYOUT_DUO_UNI_4:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = voice_[0].gate() ? 255 : 0;
+      brightness[3] = voice_[0].gate() ? 255 : 0;
+      brightness[4] = voice_[1].gate() ? 255 : 0;
+      brightness[5] = voice_[1].gate() ? 255 : 0;
+      brightness[6] = voice_[1].gate() ? 255 : 0;
+      brightness[7] = voice_[1].gate() ? 255 : 0;
+      break;
+      
+      case LAYOUT_QUAD_UNI_2:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[0].gate() ? 255 : 0;
+      brightness[2] = voice_[1].gate() ? 255 : 0;
+      brightness[3] = voice_[1].gate() ? 255 : 0;
+      brightness[4] = voice_[2].gate() ? 255 : 0;
+      brightness[5] = voice_[2].gate() ? 255 : 0;
+      brightness[6] = voice_[3].gate() ? 255 : 0;
+      brightness[7] = voice_[3].gate() ? 255 : 0;
+      break;
+      
+      case LAYOUT_OCTAL:
+      brightness[0] = voice_[0].gate() ? 255 : 0;
+      brightness[1] = voice_[1].gate() ? 255 : 0;
+      brightness[2] = voice_[2].gate() ? 255 : 0;
+      brightness[3] = voice_[3].gate() ? 255 : 0;
+      brightness[4] = voice_[4].gate() ? 255 : 0;
+      brightness[5] = voice_[5].gate() ? 255 : 0;
+      brightness[6] = voice_[6].gate() ? 255 : 0;
+      brightness[7] = voice_[7].gate() ? 255 : 0;
       break;
       
     case LAYOUT_DUAL_MONO:
