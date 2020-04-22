@@ -47,7 +47,7 @@ class ChannelLeds {
   }
   
   void Write(const uint8_t* brightness) {
-    std::copy(&brightness[0], &brightness[9], &brightness_[0]); 
+    std::copy(&brightness[0], &brightness[8], &brightness_[0]); 
    // est-ce que passer le &brightness[4] à &brightness[8] permet d'augmenter le nombre de chan de led ?
   }
   
