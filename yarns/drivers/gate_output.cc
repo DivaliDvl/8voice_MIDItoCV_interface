@@ -34,10 +34,16 @@ namespace yarns {
 
 void GateOutput::Init() {
   GPIO_InitTypeDef gpio_init;
-  gpio_init.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_10 | GPIO_Pin_11;
-  gpio_init.GPIO_Speed = GPIO_Speed_50MHz;
+  gpio_init.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_14;
+  gpio_init.GPIO_Speed = GPIO_Speed_50MHz; //does having 50MHz here for GPIOB and GPIOA and 10MHz on the led side works ?
   gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOB, &gpio_init);
+  
+  gpio_init.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_8;
+  gpio_init.GPIO_Speed = GPIO_Speed_50MHz;
+  gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_Init(GPIOA, &gpio_init); //does mentionning GPIOB first and then GPIOA can cause any trouble ?
+                                //same question for the following section
 }
 
 void GateOutput::Write(const bool* gate) {
@@ -45,6 +51,10 @@ void GateOutput::Write(const bool* gate) {
   GPIO_WriteBit(GPIOB, GPIO_Pin_11, static_cast<BitAction>(gate[1]));
   GPIO_WriteBit(GPIOB, GPIO_Pin_0, static_cast<BitAction>(gate[2]));
   GPIO_WriteBit(GPIOB, GPIO_Pin_1, static_cast<BitAction>(gate[3]));
+  GPIO_WriteBit(GPIOB, GPIO_Pin_14, static_cast<BitAction>(gate[4]));
+  GPIO_WriteBit(GPIOA, GPIO_Pin_11, static_cast<BitAction>(gate[5]));
+  GPIO_WriteBit(GPIOA, GPIO_Pin_12, static_cast<BitAction>(gate[6]));
+  GPIO_WriteBit(GPIOA, GPIO_Pin_8, static_cast<BitAction>(gate[7]));
 }
 
 }  // namespace yarns
