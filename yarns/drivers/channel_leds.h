@@ -24,7 +24,7 @@
 //
 // -----------------------------------------------------------------------------
 //
-// Driver for the 4 channels LEDs.
+// Driver for the 4 channels LEDs. Changed to 9 LEDS (8 channel leds and 1 clock led)
 
 #ifndef YARNS_DRIVERS_CHANNEL_LEDS_H_
 #define YARNS_DRIVERS_CHANNEL_LEDS_H_
@@ -47,7 +47,7 @@ class ChannelLeds {
   }
   
   void Write(const uint8_t* brightness) {
-    std::copy(&brightness[0], &brightness[8], &brightness_[0]); 
+    std::copy(&brightness[0], &brightness[9], &brightness_[0]); 
    // est-ce que passer le &brightness[4] à &brightness[8] permet d'augmenter le nombre de chan de led ?
   }
   
@@ -55,7 +55,7 @@ class ChannelLeds {
   
  private:
   uint8_t pwm_counter_;
-  uint8_t brightness_[8];
+  uint8_t brightness_[9];
   
   DISALLOW_COPY_AND_ASSIGN(ChannelLeds);
 };
