@@ -35,7 +35,7 @@
 
 namespace yarns {
 
-const uint8_t kNumChannels = 4;
+const uint8_t kNumChannels = 8;
 
 class Dac {
  public:
@@ -56,6 +56,10 @@ class Dac {
     set_channel(1, values[1]);
     set_channel(2, values[2]);
     set_channel(3, values[3]);
+    set_channel(4, values[4]);
+    set_channel(5, values[5]);
+    set_channel(6, values[6]);
+    set_channel(7, values[7]);
   }
   
   inline void Cycle() {
@@ -74,8 +78,8 @@ class Dac {
     GPIOB->BRR = GPIO_Pin_12;
     uint16_t word = value;
     uint16_t dac_channel = kNumChannels - 1 - active_channel_;
-    SPI_I2S_SendData(SPI2, 0x1000 | (dac_channel << 9) | (word >> 8));
-    SPI_I2S_SendData(SPI2, word << 8);
+    SPI_I2S_SendData(SPI2, 0x1000 | (dac_channel << 9) | (word >> 8)); //à changer ?
+    SPI_I2S_SendData(SPI2, word << 8);  // à changer ?
   }
   
   inline uint8_t channel() { return active_channel_; }
