@@ -55,7 +55,7 @@ class ChannelLeds {
   
  private:
   uint8_t pwm_counter_;
-  uint8_t brightness_[9];
+  uint8_t brightness_[8];
   
   DISALLOW_COPY_AND_ASSIGN(ChannelLeds);
 };
