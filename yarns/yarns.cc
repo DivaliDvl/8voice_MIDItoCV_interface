@@ -63,10 +63,10 @@ void PendSV_Handler(void) { }
 
 extern "C" {
 
-uint16_t cv[4];
-bool gate[4];
+uint16_t cv[15];
+bool gate[8];
 bool has_audio_sources;
-uint8_t audio_source[4];
+//uint8_t audio_source[4];
 uint16_t factory_testing_counter;
 
 void SysTick_Handler() {
@@ -127,6 +127,12 @@ void SysTick_Handler() {
     gate[1] = (factory_testing_counter % 400) < 200;
     gate[2] = (factory_testing_counter % 266) < 133;
     gate[3] = (factory_testing_counter % 200) < 100;
+    gate[4] = (factory_testing_counter % 1000) < 500;
+    gate[5] = (factory_testing_counter % 500) < 250;
+    gate[6] = (factory_testing_counter % 250) < 125;
+    gate[7] = (factory_testing_counter % 200) < 100; //quelles valeurs mettre ? j'ai mis du random pour les précédentes 
+    gate[8] = (factory_testing_counter % 266) < 133; // quelle valeur ?
+    gate[9] = (factory_testing_counter % 200) < 100; //quelle valeur ?
     ++factory_testing_counter;
   }
   
