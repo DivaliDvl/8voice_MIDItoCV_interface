@@ -314,34 +314,34 @@ void Multi::Set(uint8_t address, uint8_t value) {
     }
   }
 }
-
+//est-ce que l'utilisation de 0 est pertinente pour les out non utilisés
 void Multi::GetCvGate(uint16_t* cv, bool* gate) {
   switch (settings_.layout) {
     case LAYOUT_MONO:
       cv[0] = voice_[0].note_dac_code();
-      cv[1] = ?;
-      cv[2] = ?;
-      cv[3] = ?;
-      cv[4] = ?;
-      cv[5] = ?;
-      cv[6] = ?;
-      cv[7] = ?;
+      cv[1] = 0;
+      cv[2] = 0;
+      cv[3] = 0;
+      cv[4] = 0;
+      cv[5] = 0;
+      cv[6] = 0;
+      cv[7] = 0;
       cv[8] = voice_[0].velocity_dac_code();
-      cv[9] = ?;
-      cv[10] = ?;
-      cv[11] = ?;
-      cv[12] = ?;
-      cv[13] = ?;
-      cv[14] = ?;
-      cv[15] = ?;
+      cv[9] = 0;
+      cv[10] = 0;
+      cv[11] = 0;
+      cv[12] = 0;
+      cv[13] = 0;
+      cv[14] = 0;
+      cv[15] = 0;
       gate[0] = voice_[0].gate();
-      gate[1] = ?;
-      gate[2] = ?;
-      gate[3] = ?;
-      gate[4] = ?;
-      gate[5] = ?;
-      gate[6] = ?;
-      gate[7] = ?;
+      gate[1] = 0;
+      gate[2] = 0;
+      gate[3] = 0;
+      gate[4] = 0;
+      gate[5] = 0;
+      gate[6] = 0;
+      gate[7] = 0;
       gate[8] = clock();
       gate[9] = reset_or_playing_flag();
       break;
@@ -349,28 +349,28 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
     case LAYOUT_MONO_UNI_2:
       cv[0] = voice_[0].note_dac_code();
       cv[1] = voice_[0].note_dac_code();
-      cv[2] = ?;
-      cv[3] = ?;
-      cv[4] = ?;
-      cv[5] = ?;
-      cv[6] = ?;
-      cv[7] = ?;
+      cv[2] = 0;
+      cv[3] = 0;
+      cv[4] = 0;
+      cv[5] = 0;
+      cv[6] = 0;
+      cv[7] = 0;
       cv[8] = voice_[0].velocity_dac_code();
       cv[9] = voice_[0].velocity_dac_code();
-      cv[10] = ?;
-      cv[11] = ?;
-      cv[12] = ?;
-      cv[13] = ?;
-      cv[14] = ?;
-      cv[15] = ?;
+      cv[10] = 0;
+      cv[11] = 0;
+      cv[12] = 0;
+      cv[13] = 0;
+      cv[14] = 0;
+      cv[15] = 0;
       gate[0] = voice_[0].gate();
       gate[1] = voice_[0].gate();
-      gate[2] = ?;
-      gate[3] = ?;
-      gate[4] = ?;
-      gate[5] = ?;
-      gate[6] = ?;
-      gate[7] = ?;
+      gate[2] = 0;
+      gate[3] = 0;
+      gate[4] = 0;
+      gate[5] = 0;
+      gate[6] = 0;
+      gate[7] = 0;
       gate[8] = clock();
       gate[9] = reset_or_playing_flag();
       break;
@@ -380,26 +380,26 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
       cv[1] = voice_[0].note_dac_code();
       cv[2] = voice_[0].note_dac_code();
       cv[3] = voice_[0].note_dac_code();
-      cv[4] = ?;
-      cv[5] = ?;
-      cv[6] = ?;
-      cv[7] = ?;
+      cv[4] = 0;
+      cv[5] = 0;
+      cv[6] = 0;
+      cv[7] = 0;
       cv[8] = voice_[0].velocity_dac_code();
       cv[9] = voice_[0].velocity_dac_code();
       cv[10] = voice_[0].velocity_dac_code();
       cv[11] = voice_[0].velocity_dac_code();
-      cv[12] = ?;
-      cv[13] = ?;
-      cv[14] = ?;
-      cv[15] = ?;
+      cv[12] = 0;
+      cv[13] = 0;
+      cv[14] = 0;
+      cv[15] = 0;
       gate[0] = voice_[0].gate();
       gate[1] = voice_[0].gate();
       gate[2] = voice_[0].gate();
       gate[3] = voice_[0].gate();
-      gate[4] = ?;
-      gate[5] = ?;
-      gate[6] = ?;
-      gate[7] = ?;
+      gate[4] = 0;
+      gate[5] = 0;
+      gate[6] = 0;
+      gate[7] = 0;
       gate[8] = clock();
       gate[9] = reset_or_playing_flag();
       break;
@@ -436,28 +436,28 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
     case LAYOUT_DUO:
       cv[0] = voice_[0].note_dac_code();
       cv[1] = voice_[1].note_dac_code();
-      cv[2] = ?;
-      cv[3] = ?;
-      cv[4] = ?;
-      cv[5] = ?;
-      cv[6] = ?;
-      cv[7] = ?;
+      cv[2] = 0;
+      cv[3] = 0;
+      cv[4] = 0;
+      cv[5] = 0;
+      cv[6] = 0;
+      cv[7] = 0;
       cv[8] = voice_[0].velocity_dac_code();
       cv[9] = voice_[1].velocity_dac_code();
-      cv[10] = ?;
-      cv[11] = ?;
-      cv[12] = ?;
-      cv[13] = ?;
-      cv[14] = ?;
-      cv[15] = ?;
+      cv[10] = 0;
+      cv[11] = 0;
+      cv[12] = 0;
+      cv[13] = 0;
+      cv[14] = 0;
+      cv[15] = 0;
       gate[0] = voice_[0].gate();
       gate[1] = voice_[1].gate();
-      gate[2] = ?;
-      gate[3] = ?;
-      gate[4] = ?;
-      gate[5] = ?;
-      gate[6] = ?;
-      gate[7] = ?;
+      gate[2] = 0;
+      gate[3] = 0;
+      gate[4] = 0;
+      gate[5] = 0;
+      gate[6] = 0;
+      gate[7] = 0;
       gate[8] = clock();
       gate[9] = reset_or_playing_flag();
       break;
@@ -467,26 +467,26 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
       cv[1] = voice_[0].note_dac_code();
       cv[2] = voice_[1].note_dac_code();
       cv[3] = voice_[1].note_dac_code();
-      cv[4] = ?;
-      cv[5] = ?;
-      cv[6] = ?;
-      cv[7] = ?;
+      cv[4] = 0;
+      cv[5] = 0;
+      cv[6] = 0;
+      cv[7] = 0;
       cv[8] = voice_[0].velocity_dac_code();
       cv[9] = voice_[0].velocity_dac_code();
       cv[10] = voice_[1].velocity_dac_code();
       cv[11] = voice_[1].velocity_dac_code();
-      cv[12] = ?;
-      cv[13] = ?;
-      cv[14] = ?;
-      cv[15] = ?;
+      cv[12] = 0;
+      cv[13] = 0;
+      cv[14] = 0;
+      cv[15] = 0;
       gate[0] = voice_[0].gate();
       gate[1] = voice_[0].gate();
       gate[2] = voice_[1].gate();
       gate[3] = voice_[1].gate();
-      gate[4] = ?;
-      gate[5] = ?;
-      gate[6] = ?;
-      gate[7] = ?;
+      gate[4] = 0;
+      gate[5] = 0;
+      gate[6] = 0;
+      gate[7] = 0;
       gate[8] = clock();
       gate[9] = reset_or_playing_flag();
       break;
@@ -580,51 +580,51 @@ void Multi::GetCvGate(uint16_t* cv, bool* gate) {
   }
 }
 
-bool Multi::GetAudioSource(uint8_t* audio_source) {
-  bool has_audio_source = false;
-  switch (settings_.layout) {
-    case LAYOUT_MONO:
-    case LAYOUT_DUAL_POLYCHAINED:
-      audio_source[0] = 0xff;
-      audio_source[1] = 0xff;
-      audio_source[2] = 0xff;
-      audio_source[3] = voice_[0].audio_mode() ? 0 : 0xff;
-      has_audio_source = voice_[0].audio_mode();
-      break;
+//bool Multi::GetAudioSource(uint8_t* audio_source) {
+  //bool has_audio_source = false;
+  //switch (settings_.layout) {
+    //case LAYOUT_MONO:
+    //case LAYOUT_DUAL_POLYCHAINED:
+      //audio_source[0] = 0xff;
+      //audio_source[1] = 0xff;
+      //audio_source[2] = 0xff;
+      //audio_source[3] = voice_[0].audio_mode() ? 0 : 0xff;
+      //has_audio_source = voice_[0].audio_mode();
+      //break;
       
-    case LAYOUT_DUAL_MONO:
-    case LAYOUT_DUAL_POLY:
-    case LAYOUT_QUAD_POLYCHAINED:
-      audio_source[0] = 0xff;
-      audio_source[1] = 0xff;
-      audio_source[2] = voice_[0].audio_mode() ? 0 : 0xff;
-      audio_source[3] = voice_[1].audio_mode() ? 1 : 0xff;
-      has_audio_source = voice_[0].audio_mode() || voice_[1].audio_mode();
-      break;
+    //case LAYOUT_DUAL_MONO:
+    //case LAYOUT_DUAL_POLY:
+    //case LAYOUT_QUAD_POLYCHAINED:
+      //audio_source[0] = 0xff;
+      //audio_source[1] = 0xff;
+      //audio_source[2] = voice_[0].audio_mode() ? 0 : 0xff;
+      //audio_source[3] = voice_[1].audio_mode() ? 1 : 0xff;
+      //has_audio_source = voice_[0].audio_mode() || voice_[1].audio_mode();
+      //break;
       
-    case LAYOUT_QUAD_MONO:
-    case LAYOUT_QUAD_POLY:
-    case LAYOUT_OCTAL_POLYCHAINED:
-    case LAYOUT_THREE_ONE:
-      audio_source[0] = voice_[0].audio_mode() ? 0 : 0xff;
-      audio_source[1] = voice_[1].audio_mode() ? 1 : 0xff;
-      audio_source[2] = voice_[2].audio_mode() ? 2 : 0xff;
-      audio_source[3] = voice_[3].audio_mode() ? 3 : 0xff;
-      has_audio_source = voice_[0].audio_mode() || voice_[1].audio_mode() || \
-          voice_[2].audio_mode() || voice_[3].audio_mode();
-      break;
+    //case LAYOUT_QUAD_MONO:
+    //case LAYOUT_QUAD_POLY:
+    //case LAYOUT_OCTAL_POLYCHAINED:
+    //case LAYOUT_THREE_ONE:
+      //audio_source[0] = voice_[0].audio_mode() ? 0 : 0xff;
+      //audio_source[1] = voice_[1].audio_mode() ? 1 : 0xff;
+      //audio_source[2] = voice_[2].audio_mode() ? 2 : 0xff;
+      //audio_source[3] = voice_[3].audio_mode() ? 3 : 0xff;
+      //has_audio_source = voice_[0].audio_mode() || voice_[1].audio_mode() || \
+          //voice_[2].audio_mode() || voice_[3].audio_mode();
+      //break;
     
-    case LAYOUT_QUAD_TRIGGERS:
-    case LAYOUT_QUAD_VOLTAGES:
-      audio_source[0] = 0xff;
-      audio_source[1] = 0xff;
-      audio_source[2] = 0xff;
-      audio_source[3] = 0xff;
-      has_audio_source = false;
-      break;
-  }
-  return has_audio_source;
-}
+    //case LAYOUT_QUAD_TRIGGERS:
+    //case LAYOUT_QUAD_VOLTAGES:
+      //audio_source[0] = 0xff;
+      //audio_source[1] = 0xff;
+      //audio_source[2] = 0xff;
+      //audio_source[3] = 0xff;
+      //has_audio_source = false;
+      //break;
+  //}
+  //return has_audio_source;
+//}
 
 void Multi::GetLedsBrightness(uint8_t* brightness) {
   if (layout_configurator_.learning()) {
@@ -638,24 +638,24 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
   switch (settings_.layout) {
     case LAYOUT_MONO:
       brightness[0] = voice_[0].gate() ? 255 : 0;
-      brightness[1] = ?;
-      brightness[2] = ?;
-      brightness[3] = ?;
-      brightness[4] = ?;
-      brightness[5] = ?;
-      brightness[6] = ?;
-      brightness[7] = ?;
+      brightness[1] = 0;
+      brightness[2] = 0;
+      brightness[3] = 0;
+      brightness[4] = 0;
+      brightness[5] = 0;
+      brightness[6] = 0;
+      brightness[7] = 0;
       break;
       
     case LAYOUT_MONO_UNI_2:
       brightness[0] = voice_[0].gate() ? 255 : 0;
       brightness[1] = voice_[0].gate() ? 255 : 0;
-      brightness[2] = ?;
-      brightness[3] = ?;
-      brightness[4] = ?;
-      brightness[5] = ?;
-      brightness[6] = ?;
-      brightness[7] = ?;
+      brightness[2] = 0;
+      brightness[3] = 0;
+      brightness[4] = 0;
+      brightness[5] = 0;
+      brightness[6] = 0;
+      brightness[7] = 0;
       break;
       
     case LAYOUT_MONO_UNI_4:
@@ -663,10 +663,10 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[1] = voice_[0].gate() ? 255 : 0;
       brightness[2] = voice_[0].gate() ? 255 : 0;
       brightness[3] = voice_[0].gate() ? 255 : 0;
-      brightness[4] = ?;
-      brightness[5] = ?;
-      brightness[6] = ?;
-      brightness[7] = ?;
+      brightness[4] = 0;
+      brightness[5] = 0;
+      brightness[6] = 0;
+      brightness[7] = 0;
       break;
       
     case LAYOUT_MONO_UNI_8:
@@ -683,12 +683,12 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       case LAYOUT_DUO:
       brightness[0] = voice_[0].gate() ? 255 : 0;
       brightness[1] = voice_[1].gate() ? 255 : 0;
-      brightness[2] = ?;
-      brightness[3] = ?;
-      brightness[4] = ?;
-      brightness[5] = ?;
-      brightness[6] = ?;
-      brightness[7] = ?;
+      brightness[2] = 0;
+      brightness[3] = 0;
+      brightness[4] = 0;
+      brightness[5] = 0;
+      brightness[6] = 0;
+      brightness[7] = 0;
       break;
       
       case LAYOUT_DUO_UNI_2:
@@ -696,10 +696,10 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[1] = voice_[0].gate() ? 255 : 0;
       brightness[2] = voice_[1].gate() ? 255 : 0;
       brightness[3] = voice_[1].gate() ? 255 : 0;
-      brightness[4] = ?;
-      brightness[5] = ?;
-      brightness[6] = ?;
-      brightness[7] = ?;
+      brightness[4] = 0;
+      brightness[5] = 0;
+      brightness[6] = 0;
+      brightness[7] = 0;
       break;
       
       case LAYOUT_DUO_UNI_4:
@@ -734,39 +734,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[6] = voice_[6].gate() ? 255 : 0;
       brightness[7] = voice_[7].gate() ? 255 : 0;
       break;
-      
-    case LAYOUT_DUAL_MONO:
-      brightness[0] = voice_[0].gate() ? 255 : 0;
-      brightness[1] = voice_[1].gate() ? 255 : 0;
-      brightness[2] = voice_[0].aux_cv();
-      brightness[3] = voice_[1].aux_cv();
-      break;
-
-    case LAYOUT_DUAL_POLY:
-    case LAYOUT_QUAD_POLYCHAINED:
-      brightness[0] = voice_[0].gate() ? 255 : 0;
-      brightness[1] = voice_[1].gate() ? 255 : 0;
-      brightness[2] = voice_[0].aux_cv();
-      brightness[3] = voice_[1].aux_cv_2();
-      break;
-      
-    case LAYOUT_QUAD_MONO:
-    case LAYOUT_QUAD_POLY:
-    case LAYOUT_OCTAL_POLYCHAINED:
-    case LAYOUT_QUAD_TRIGGERS:
-    case LAYOUT_THREE_ONE:
-      brightness[0] = voice_[0].gate() ? (voice_[0].velocity() << 1) : 0;
-      brightness[1] = voice_[1].gate() ? (voice_[1].velocity() << 1) : 0;
-      brightness[2] = voice_[2].gate() ? (voice_[2].velocity() << 1) : 0;
-      brightness[3] = voice_[3].gate() ? (voice_[3].velocity() << 1) : 0;
-      break;
-      
-    case LAYOUT_QUAD_VOLTAGES:
-      brightness[0] = voice_[0].aux_cv();
-      brightness[1] = voice_[1].aux_cv();
-      brightness[2] = voice_[2].aux_cv();
-      brightness[3] = voice_[3].aux_cv();
-      break;
+     
   }
 }
 
@@ -779,15 +747,17 @@ void Multi::UpdateLayout() {
     voice_[i].NoteOff();
   }
   
+  // BON LA J'AI RIEN COMPRIS, A REVOIR
+  
   switch (settings_.layout) {
     case LAYOUT_MONO:
-    case LAYOUT_DUAL_MONO:
-    case LAYOUT_QUAD_MONO:
+    //case LAYOUT_DUAL_MONO:
+    //case LAYOUT_QUAD_MONO:
       {
         uint8_t num_parts = settings_.layout == LAYOUT_MONO ? 1 : \
             (settings_.layout == LAYOUT_DUAL_MONO ? 2 : 4);
         for (uint8_t i = 0; i < num_parts; ++i) {
-          part_[i].AllocateVoices(&voice_[i], 1, false);
+          part_[i].AllocateVoices(&voice_[i], 1, false); //que signifie le false ?
         }
         num_active_parts_ = num_parts;
       }
@@ -810,23 +780,23 @@ void Multi::UpdateLayout() {
       }
       break;
       
-    case LAYOUT_QUAD_TRIGGERS:
-    case LAYOUT_QUAD_VOLTAGES:
-      {
-        for (uint8_t i = 0; i < 4; ++i) {
-          part_[i].AllocateVoices(&voice_[i], 1, false);
-        }
-        num_active_parts_ = 4;
-      }
-      break;
+    //case LAYOUT_QUAD_TRIGGERS:
+    //case LAYOUT_QUAD_VOLTAGES:
+      //{
+        //for (uint8_t i = 0; i < 4; ++i) {
+          //part_[i].AllocateVoices(&voice_[i], 1, false);
+        //}
+        //num_active_parts_ = 4;
+      //}
+      //break;
       
-    case LAYOUT_THREE_ONE:
-      {
-        part_[0].AllocateVoices(&voice_[0], 3, false);
-        part_[1].AllocateVoices(&voice_[3], 1, false);
-        num_active_parts_ = 2;
-      }
-      break;
+    //case LAYOUT_THREE_ONE:
+      //{
+        //part_[0].AllocateVoices(&voice_[0], 3, false);
+        //part_[1].AllocateVoices(&voice_[3], 1, false);
+        //num_active_parts_ = 2;
+      //}
+      //break;
     
     default:
       break;
