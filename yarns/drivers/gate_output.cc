@@ -39,7 +39,7 @@ void GateOutput::Init() {
   gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOB, &gpio_init);
   
-  gpio_init.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_8;
+  gpio_init.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_8 | GPIO_Pin_0 | GPIO_Pin_1;
   gpio_init.GPIO_Speed = GPIO_Speed_50MHz;
   gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOA, &gpio_init); //does mentionning GPIOB first and then GPIOA can cause any trouble ?
@@ -55,6 +55,9 @@ void GateOutput::Write(const bool* gate) {
   GPIO_WriteBit(GPIOA, GPIO_Pin_11, static_cast<BitAction>(gate[5]));
   GPIO_WriteBit(GPIOA, GPIO_Pin_12, static_cast<BitAction>(gate[6]));
   GPIO_WriteBit(GPIOA, GPIO_Pin_8, static_cast<BitAction>(gate[7]));
+  GPIO_WriteBit(GPIOA, GPIO_Pin_0, static_cast<BitAction>(gate[8]));
+  GPIO_WriteBit(GPIOA, GPIO_Pin_1, static_cast<BitAction>(gate[9]));
+}
 }
 
 }  // namespace yarns
