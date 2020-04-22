@@ -84,16 +84,14 @@ enum MultiSetting {
 
 enum Layout {
   LAYOUT_MONO,
-  LAYOUT_DUAL_MONO,
-  LAYOUT_QUAD_MONO,
-  LAYOUT_DUAL_POLY,
-  LAYOUT_QUAD_POLY,
-  LAYOUT_DUAL_POLYCHAINED,
-  LAYOUT_QUAD_POLYCHAINED,
-  LAYOUT_OCTAL_POLYCHAINED,
-  LAYOUT_QUAD_TRIGGERS,
-  LAYOUT_QUAD_VOLTAGES,
-  LAYOUT_THREE_ONE,
+  LAYOUT_MONO_UNI_2,
+  LAYOUT_MONO_UNI_4,
+  LAYOUT_MONO_UNI_8,
+  LAYOUT_DUO,
+  LAYOUT_DUO_UNI_2,
+  LAYOUT_DUO_UNI_4,
+  LAYOUT_QUAD_UNI_2,
+  LAYOUT_OCTAL,
   LAYOUT_LAST
 };
 
@@ -255,9 +253,7 @@ class Multi {
   void PushItNoteOn(uint8_t note) {
     uint8_t mask = recording_ ? 0x80 : 0;
     for (uint8_t i = 0; i < num_active_parts_; ++i) {
-      if (settings_.layout == LAYOUT_QUAD_TRIGGERS) {
-        note = part_[i].midi_settings().min_note;
-      }
+      
       if (!recording_ || part_[i].recording()) {
         part_[i].NoteOn(part_[i].tx_channel() | mask, note, 127);
       }
@@ -272,9 +268,7 @@ class Multi {
     uint8_t mask = recording_ ? 0x80 : 0;
     bool has_notes = false;
     for (uint8_t i = 0; i < num_active_parts_; ++i) {
-      if (settings_.layout == LAYOUT_QUAD_TRIGGERS) {
-        note = part_[i].midi_settings().min_note;
-      }
+      
       if (!recording_ || part_[i].recording()) {
         part_[i].NoteOff(part_[i].tx_channel() | mask, note);
       }
@@ -359,7 +353,7 @@ class Multi {
   }
   
   void GetCvGate(uint16_t* cv, bool* gate);
-  bool GetAudioSource(uint8_t* audio_source);
+  //bool GetAudioSource(uint8_t* audio_source);
   void GetLedsBrightness(uint8_t* brightness);
 
   template<typename T>
