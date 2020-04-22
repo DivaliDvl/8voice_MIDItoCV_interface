@@ -34,31 +34,37 @@ namespace yarns {
 
 void ChannelLeds::Init() {
   GPIO_InitTypeDef gpio_init;
-  gpio_init.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_8;
+  gpio_init.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8;
   gpio_init.GPIO_Speed = GPIO_Speed_10MHz;
   gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_Init(GPIOA, &gpio_init);
-  
-  gpio_init.GPIO_Pin = GPIO_Pin_14;
-  gpio_init.GPIO_Speed = GPIO_Speed_10MHz;
-  gpio_init.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_Init(GPIOB, &gpio_init);
+  GPIO_Init(GPIOC, &gpio_init);
   
   pwm_counter_ = 0;
-  std::fill(&brightness_[0], &brightness_[4], 0);
+  std::fill(&brightness_[0], &brightness_[8], 0);
 }
 
 void ChannelLeds::Write() {
   pwm_counter_ += 16;
   
-  GPIO_WriteBit(GPIOA, GPIO_Pin_12,
+  GPIO_WriteBit(GPIOC, GPIO_Pin_0,
                 static_cast<BitAction>(brightness_[0] > pwm_counter_));
-  GPIO_WriteBit(GPIOA, GPIO_Pin_11,
+  GPIO_WriteBit(GPIOC, GPIO_Pin_1,
                 static_cast<BitAction>(brightness_[1] > pwm_counter_));
-  GPIO_WriteBit(GPIOA, GPIO_Pin_8,
+  GPIO_WriteBit(GPIOC, GPIO_Pin_2,
                 static_cast<BitAction>(brightness_[2] > pwm_counter_));
-  GPIO_WriteBit(GPIOB, GPIO_Pin_14,
+  GPIO_WriteBit(GPIOC, GPIO_Pin_3,
                 static_cast<BitAction>(brightness_[3] > pwm_counter_));
+  GPIO_WriteBit(GPIOC, GPIO_Pin_4,
+                static_cast<BitAction>(brightness_[4] > pwm_counter_));
+  GPIO_WriteBit(GPIOC, GPIO_Pin_5,
+                static_cast<BitAction>(brightness_[5] > pwm_counter_));
+  GPIO_WriteBit(GPIOC, GPIO_Pin_6,
+                static_cast<BitAction>(brightness_[6] > pwm_counter_));
+  GPIO_WriteBit(GPIOC, GPIO_Pin_7,
+                static_cast<BitAction>(brightness_[7] > pwm_counter_));
+  GPIO_WriteBit(GPIOC, GPIO_Pin_8,
+                static_cast<BitAction>(brightness_[8] > pwm_counter_));
+  
 }
 
 }  // namespace yarns
