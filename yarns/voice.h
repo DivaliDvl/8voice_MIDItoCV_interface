@@ -37,14 +37,14 @@ namespace yarns {
 const uint16_t kNumOctaves = 11;
 const size_t kAudioBlockSize = 64;
 
-//enum TriggerShape {
-  //TRIGGER_SHAPE_SQUARE,
-  //TRIGGER_SHAPE_LINEAR,
-  //TRIGGER_SHAPE_EXPONENTIAL,
-  //TRIGGER_SHAPE_RING,
-  //TRIGGER_SHAPE_STEPS,
-  //TRIGGER_SHAPE_NOISE_BURST
-//};
+enum TriggerShape {
+  TRIGGER_SHAPE_SQUARE,
+  TRIGGER_SHAPE_LINEAR,
+  TRIGGER_SHAPE_EXPONENTIAL,
+  TRIGGER_SHAPE_RING,
+  TRIGGER_SHAPE_STEPS,
+  TRIGGER_SHAPE_NOISE_BURST
+};
 
 //enum AudioMode {
   //AUDIO_MODE_OFF,
@@ -65,7 +65,7 @@ const size_t kAudioBlockSize = 64;
   //}
 
  //private:
-  //uint32_t ComputePhaseIncrement(int16_t pitch); //ça sert à quoi ? A virer ?
+  //uint32_t ComputePhaseIncrement(int16_t pitch); //ça sert à quoi ? A virer ? Est-ce que ça gère aussi le LFO ?
   
   //void RenderSilence();
   //void RenderNoise();
@@ -128,14 +128,14 @@ class Voice {
   inline void set_vibrato_range(uint8_t vibrato_range) {
     vibrato_range_ = vibrato_range;
   }
-  //inline void set_trigger_duration(uint8_t trigger_duration) {
-    //trigger_duration_ = trigger_duration;
-  //}
-  //inline void set_trigger_scale(uint8_t trigger_scale) {
-    //trigger_scale_ = trigger_scale;
-  //}
-  //inline void set_trigger_shape(uint8_t trigger_shape) {
-    //trigger_shape_ = trigger_shape;
+  inline void set_trigger_duration(uint8_t trigger_duration) {
+    trigger_duration_ = trigger_duration;
+  }
+  inline void set_trigger_scale(uint8_t trigger_scale) {
+    trigger_scale_ = trigger_scale;
+  }
+  inline void set_trigger_shape(uint8_t trigger_shape) {
+    trigger_shape_ = trigger_shape;
   }
   inline void set_aux_cv(uint8_t aux_cv_source) {
     aux_cv_source_ = aux_cv_source;
@@ -176,11 +176,11 @@ class Voice {
   inline bool gate_on() const { return gate_; }
 
   inline bool gate() const { return gate_ && !retrigger_delay_; }
-  //inline bool trigger() const  {
-    //return gate_ && trigger_pulse_;
-  //}
+  inline bool trigger() const  {
+    return gate_ && trigger_pulse_;
+  }
   
-  //uint16_t trigger_dac_code() const;
+  uint16_t trigger_dac_code() const;
   
   inline uint16_t calibration_dac_code(uint8_t note) const {
     return calibrated_dac_code_[note];
@@ -195,9 +195,9 @@ class Voice {
     //audio_mode_ = audio_mode;
   //}
   
-  inline void set_tuning(int8_t coarse, int8_t fine) {
-    tuning_ = (static_cast<int32_t>(coarse) << 7) + fine;
-  }
+  //inline void set_tuning(int8_t coarse, int8_t fine) {
+    //tuning_ = (static_cast<int32_t>(coarse) << 7) + fine;
+  //}
   
   //inline uint8_t audio_mode() {
     //return audio_mode_;
@@ -246,9 +246,9 @@ class Voice {
   uint8_t modulation_rate_;
   uint8_t vibrato_range_;
   
-  //uint8_t trigger_duration_;
-  //uint8_t trigger_shape_;
-  //bool trigger_scale_;
+  uint8_t trigger_duration_;
+  uint8_t trigger_shape_;
+  bool trigger_scale_;
   uint8_t aux_cv_source_;
   uint8_t aux_cv_source_2_;
   
