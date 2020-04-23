@@ -35,7 +35,7 @@
 
 namespace yarns {
 
-const uint8_t kNumChannels = 4;
+const uint8_t kNumChannels = 16; //16 dac channel, 8 pitch cv and 8 velocity cv
 
 class Dac {
  public:
@@ -56,6 +56,18 @@ class Dac {
     set_channel(1, values[1]);
     set_channel(2, values[2]);
     set_channel(3, values[3]);
+    set_channel(4, values[4]);
+    set_channel(5, values[5]);
+    set_channel(6, values[6]);
+    set_channel(7, values[7]);
+    set_channel(8, values[8]);
+    set_channel(9, values[9]);
+    set_channel(10, values[10]);
+    set_channel(11, values[11]);
+    set_channel(12, values[12]);
+    set_channel(13, values[13]);
+    set_channel(14, values[14]);
+    set_channel(15, values[15]);
   }
   
   inline void Cycle() {
