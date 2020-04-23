@@ -353,7 +353,7 @@ class Multi {
   }
   
   void GetCvGate(uint16_t* cv, bool* gate);
-  //bool GetAudioSource(uint8_t* audio_source);
+  bool GetAudioSource(uint8_t* audio_source);
   void GetLedsBrightness(uint8_t* brightness);
 
   template<typename T>
