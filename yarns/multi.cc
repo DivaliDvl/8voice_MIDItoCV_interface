@@ -645,6 +645,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = 0;
       brightness[6] = 0;
       brightness[7] = 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
     case LAYOUT_MONO_UNI_2:
@@ -656,6 +657,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = 0;
       brightness[6] = 0;
       brightness[7] = 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
     case LAYOUT_MONO_UNI_4:
@@ -667,6 +669,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = 0;
       brightness[6] = 0;
       brightness[7] = 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
     case LAYOUT_MONO_UNI_8:
@@ -678,6 +681,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = voice_[0].gate() ? 255 : 0;
       brightness[6] = voice_[0].gate() ? 255 : 0;
       brightness[7] = voice_[0].gate() ? 255 : 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
       case LAYOUT_DUO:
@@ -689,6 +693,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = 0;
       brightness[6] = 0;
       brightness[7] = 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
       case LAYOUT_DUO_UNI_2:
@@ -700,6 +705,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = 0;
       brightness[6] = 0;
       brightness[7] = 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
       case LAYOUT_DUO_UNI_4:
@@ -711,6 +717,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = voice_[1].gate() ? 255 : 0;
       brightness[6] = voice_[1].gate() ? 255 : 0;
       brightness[7] = voice_[1].gate() ? 255 : 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
       case LAYOUT_QUAD_UNI_2:
@@ -722,6 +729,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = voice_[2].gate() ? 255 : 0;
       brightness[6] = voice_[3].gate() ? 255 : 0;
       brightness[7] = voice_[3].gate() ? 255 : 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
       
       case LAYOUT_OCTAL:
@@ -733,6 +741,7 @@ void Multi::GetLedsBrightness(uint8_t* brightness) {
       brightness[5] = voice_[5].gate() ? 255 : 0;
       brightness[6] = voice_[6].gate() ? 255 : 0;
       brightness[7] = voice_[7].gate() ? 255 : 0;
+      brightness[8] = clock() ? 255 : 0;
       break;
      
   }
