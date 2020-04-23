@@ -46,58 +46,58 @@ enum TriggerShape {
   TRIGGER_SHAPE_NOISE_BURST
 };
 
-//enum AudioMode {
-  //AUDIO_MODE_OFF,
-  //AUDIO_MODE_SAW,
-  //AUDIO_MODE_SQUARE,
-  //AUDIO_MODE_TRIANGLE,
-  //AUDIO_MODE_SINE
-//};
+enum AudioMode {
+  AUDIO_MODE_OFF,
+  AUDIO_MODE_SAW,
+  AUDIO_MODE_SQUARE,
+  AUDIO_MODE_TRIANGLE,
+  AUDIO_MODE_SINE
+};
 
-//class Oscillator {
- //public:
-  //Oscillator() { }
-  //~Oscillator() { }
-  //void Init(int32_t scale, int32_t offset);
-  //void Render(uint8_t mode, int16_t note, bool gate);
-  //inline uint16_t ReadSample() {
-    //return audio_buffer_.ImmediateRead();
-  //}
+class Oscillator {
+ public:
+  Oscillator() { }
+  ~Oscillator() { }
+  void Init(int32_t scale, int32_t offset);
+  void Render(uint8_t mode, int16_t note, bool gate);
+  inline uint16_t ReadSample() {
+    return audio_buffer_.ImmediateRead();
+  }
 
- //private:
-  //uint32_t ComputePhaseIncrement(int16_t pitch); //ça sert à quoi ? A virer ? Est-ce que ça gère aussi le LFO ?
+ private:
+  uint32_t ComputePhaseIncrement(int16_t pitch); //ça sert à quoi ? A virer ? Est-ce que ça gère aussi le LFO ?
   
-  //void RenderSilence();
-  //void RenderNoise();
-  //void RenderSine(uint32_t phase_increment);
-  //void RenderSaw(uint32_t phase_increment);
-  //void RenderSquare(uint32_t phase_increment, uint32_t pw, bool integrate);
+  void RenderSilence();
+  void RenderNoise();
+  void RenderSine(uint32_t phase_increment);
+  void RenderSaw(uint32_t phase_increment);
+  void RenderSquare(uint32_t phase_increment, uint32_t pw, bool integrate);
 
-  //inline int32_t ThisBlepSample(uint32_t t) {
-    //if (t > 65535) {
-      //t = 65535;
-    //}
-    //return t * t >> 18;
-  //}
+  inline int32_t ThisBlepSample(uint32_t t) {
+    if (t > 65535) {
+      t = 65535;
+    }
+    return t * t >> 18;
+  }
   
-  //inline int32_t NextBlepSample(uint32_t t) {
-    //if (t > 65535) {
-      //t = 65535;
-    //}
-    //t = 65535 - t;
-    //return -static_cast<int32_t>(t * t >> 18);
-  //}
+  inline int32_t NextBlepSample(uint32_t t) {
+    if (t > 65535) {
+      t = 65535;
+    }
+    t = 65535 - t;
+    return -static_cast<int32_t>(t * t >> 18);
+  }
   
-  //int32_t scale_;
-  //int32_t offset_;
-  //uint32_t phase_;
-  //int32_t next_sample_;
-  //int32_t integrator_state_;
-  //bool high_;
-  //stmlib::RingBuffer<uint16_t, kAudioBlockSize * 2> audio_buffer_;
+  int32_t scale_;
+  int32_t offset_;
+  uint32_t phase_;
+  int32_t next_sample_;
+  int32_t integrator_state_;
+  bool high_;
+  stmlib::RingBuffer<uint16_t, kAudioBlockSize * 2> audio_buffer_;
   
-  //DISALLOW_COPY_AND_ASSIGN(Oscillator);
-//};
+  DISALLOW_COPY_AND_ASSIGN(Oscillator);
+};
 
 class Voice {
  public:
