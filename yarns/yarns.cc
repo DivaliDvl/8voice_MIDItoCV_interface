@@ -66,8 +66,8 @@ extern "C" {
 uint16_t cv[16];
 gate[10]; //ajouter uint8_t ?
 //bool gate[4];
-//bool has_audio_sources;
-//uint8_t audio_source[4];
+bool has_audio_sources;
+uint8_t audio_source[4];
 uint16_t factory_testing_counter;
 
 void SysTick_Handler() {
@@ -79,9 +79,9 @@ void SysTick_Handler() {
     system_clock.Tick();
   }
   // When there is audio sources, lower the display refresh rate to 8kHz.
-  //if (has_audio_sources) {
-    //ui.PollFast();
-  //}
+  if (has_audio_sources) {
+    ui.PollFast();
+  }
   
   // Try to read some MIDI input if available.
   if (midi_io.readable()) {
@@ -108,7 +108,7 @@ void SysTick_Handler() {
   gate_output.Write(gate);
   multi.Refresh();
   multi.GetCvGate(cv, gate);
-  //has_audio_sources = multi.GetAudioSource(audio_source);
+  has_audio_sources = multi.GetAudioSource(audio_source);
   
   // In calibration mode, overrides the DAC outputs with the raw calibration
   // table values.
@@ -147,24 +147,24 @@ void TIM1_UP_IRQHandler(void) {
   }
   TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
 
-  //dac.Cycle();
-  //uint8_t source_voice = audio_source[dac.channel()];
-  //if (source_voice != 0xff) {
-    //uint16_t audio_sample = multi.mutable_voice(source_voice)->ReadSample();
-    //dac.Write(audio_sample);
-  //} else {
+  dac.Cycle();
+  uint8_t source_voice = audio_source[dac.channel()];
+  if (source_voice != 0xff) {
+    uint16_t audio_sample = multi.mutable_voice(source_voice)->ReadSample();
+    dac.Write(audio_sample);
+  } else {
     // Use value written there during previous CV refresh.
-    //dac.Write();
-  //}
+    dac.Write();
+  }
   
-  //if (dac.channel() == 0) {
-    // Internal clock refresh at 48kHz
-    //multi.RefreshInternalClock();
-  //} else (dac.channel() == 1) { //removed an if avec else
-    //if (!has_audio_sources) {
-      //ui.PollFast();
-    //}
-  //}
+  if (dac.channel() == 0) {
+     Internal clock refresh at 48kHz
+    multi.RefreshInternalClock();
+  } else (dac.channel() == 1) { //removed an if avec else
+    if (!has_audio_sources) {
+      ui.PollFast();
+    }
+  }
 }
 
 }
@@ -194,7 +194,7 @@ int main(void) {
     ui.DoEvents();
     midi_handler.ProcessInput();
     multi.ProcessInternalClockEvents();
-    // multi.RenderAudio(); Vraiment à virer ?
+     multi.RenderAudio();
     if (midi_handler.factory_testing_requested()) {
       midi_handler.AcknowledgeFactoryTestingRequest();
       ui.StartFactoryTesting();
