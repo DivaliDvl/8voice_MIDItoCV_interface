@@ -242,15 +242,27 @@ void Ui::Poll() {
   if (mode_ == UI_MODE_FACTORY_TESTING) {
     ++factory_testing_leds_counter_;
     uint16_t x = factory_testing_leds_counter_;
-    leds_brightness[0] = (((x + 384) & 511) < 128) ? 255 : 0;
-    leds_brightness[1] = (((x + 256) & 511) < 128) ? 255 : 0;
-    leds_brightness[2] = (((x + 128) & 511) < 128) ? 255 : 0;
-    leds_brightness[3] = (((x + 000) & 511) < 128) ? 255 : 0;
-  } else if (mode_ == UI_MODE_SPLASH) {
+    leds_brightness[0] = (((x + 2048) & 511) < 128) ? 255 : 0;//does this value works ? as it's an uint16_t it seems to me like
+    leds_brightness[1] = (((x + 1536) & 511) < 128) ? 255 : 0;// it can and 2048 is not too high
+    leds_brightness[2] = (((x + 1024) & 511) < 128) ? 255 : 0;
+    leds_brightness[3] = (((x + 768) & 511) < 128) ? 255 : 0;
+    leds_brightness[4] = (((x + 512) & 511) < 128) ? 255 : 0;
+    leds_brightness[5] = (((x + 384) & 511) < 128) ? 255 : 0;
+    leds_brightness[6] = (((x + 256) & 511) < 128) ? 255 : 0;
+    leds_brightness[7] = (((x + 192) & 511) < 128) ? 255 : 0;
+    leds_brightness[8] = (((x + 128) & 511) < 128) ? 255 : 0;
+    leds_brightness[9] = (((x + 000) & 511) < 128) ? 255 : 0;
+  } else if (mode_ == UI_MODE_SPLASH) { // what does it mean ?
     leds_brightness[0] = 255;
     leds_brightness[1] = 0;
     leds_brightness[2] = 0;
     leds_brightness[3] = 0;
+    leds_brightness[4] = 0;
+    leds_brightness[5] = 0;
+    leds_brightness[6] = 0;
+    leds_brightness[7] = 0;
+    leds_brightness[8] = 0;
+    leds_brightness[9] = 0;
   }
   
   leds_.Write(leds_brightness);
